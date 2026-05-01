@@ -26,7 +26,7 @@ export default function HomePage() {
           data-testid="github-link"
           target="_blank"
           rel="noreferrer"
-          href="https://www.github.com/TestCoders/testrpg"
+          href="https://www.github.com/micheltestcoders/testrpg"
           className={cn(
             "flex items-center justify-center space-x-2",
             buttonVariants({ variant: "outline", size: "default" }),
