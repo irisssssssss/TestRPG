@@ -9,7 +9,7 @@ TestRPG is a small RPG-styled web app meant to be automated through a Test Autom
 - Tailwind CSS with shadcn/ui primitives on top of Radix UI
 - Zustand for state management, React Hook Form with Zod for form handling
 - React Router for client-side routing
-- Deployed on Vercel
+- Express for the local API server (port 3001), proxied through Vite in dev
 
 ## Getting started
 
@@ -20,9 +20,7 @@ pnpm install
 pnpm dev
 ```
 
-The dev server runs on [http://localhost:3000](http://localhost:3000).
-
-> **Note:** `pnpm dev` serves only the Vite frontend — the `/api/*` serverless functions are not available. To run the full stack locally (UI + API), install the [Vercel CLI](https://vercel.com/docs/cli) and run `vercel dev` instead. This starts both the frontend and the serverless functions on the same port.
+The dev server runs on [http://localhost:3000](http://localhost:3000). The API server runs on [http://localhost:3001](http://localhost:3001). Vite proxies all `/api/*` requests automatically, so you can test both the UI and the API endpoints from port 3000.
 
 Other scripts:
 
