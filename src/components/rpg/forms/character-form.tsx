@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -51,6 +51,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 export function CharacterForm(props: FormProps) {
   const [disabled, setDisabled] = useState<boolean>(false);
+    const [builds, setBuilds] = useState<Record<string, any>>({});
   const setName = useStore((state) => state.setName);
   const setBuild = useStore((state) => state.setBuild);
   const setStats = useStore((state) => state.setStats);
@@ -59,6 +60,13 @@ export function CharacterForm(props: FormProps) {
     resolver: zodResolver(formSchema),
     defaultValues: { name: "", build: "thief" },
   });
+
+   // Fetch builds on component mount
+  useEffect(() => {
+    fetch("http://localhost:3000/api/builds")
+      .then((res) => res.json())
+      .then(setBuilds);
+  }, []);
 
   function onSubmitHandler() {
     props.onSubmit();
@@ -119,12 +127,19 @@ export function CharacterForm(props: FormProps) {
                           <SelectValue placeholder="Select a build!" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                        <SelectContent>
+                  {Object.keys(builds).map((key) => (
+                    <SelectItem key={key} value={key}>
+                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+                      {/* <SelectContent>
                         <SelectItem value="thief">Thief</SelectItem>
                         <SelectItem value="knight">Knight</SelectItem>
                         <SelectItem value="mage">Mage</SelectItem>
                         <SelectItem value="brigadier">Brigadier</SelectItem>
-                      </SelectContent>
+                      </SelectContent> */}
                     </Select>
                     <FormDescription>Select your character&apos;s build</FormDescription>
                     <FormMessage />
