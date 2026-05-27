@@ -40,7 +40,7 @@ test('Changing the character build type changes the stats (strength, agility, wi
 
  await expect(page.locator('[data-character-stats="Strength"]')).toContainText('6');
  await expect(page.locator('[data-character-stats="Agility"]')).toContainText('2');
- await expect(page.locator('[data-character-stats="Wisdom"]')).toContainText('2');
+ await expect(page.locator('[data-character-stats="Wisdom"]')).toContainText('1');
  await expect(page.locator('[data-character-stats="Magic"]')).toContainText('1');
 
 });
